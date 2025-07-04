@@ -1,23 +1,31 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Dunia Juf - Beta Awal</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Dunia Juf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <audio id="bgm" autoplay loop>
-        <source src="sound/backsound.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-    <div id="scene">
-        <img id="background" src="img/bg_taman.jpg" alt="Taman Kota Sore">
-        <img id="shira" src="img/shira.png" alt="Shira">
-        <div id="dialog-box">
-            <p id="dialog-text">Sore itu, Juf duduk di bangku taman, lalu datanglah Shira...</p>
-        </div>
+  <audio id="bgm" src="sound/backsound.mp3" autoplay loop></audio>
+
+  <div id="game">
+    <img src="img/bg_taman.jpg" id="background" alt="Taman Kota Sore">
+    <img src="img/juf_idle.png" id="juf" alt="Juf">
+    <img src="img/shira_normal.png" id="shira" alt="Shira">
+
+    <div id="dialog-box">
+      <p id="dialog-text">...</p>
     </div>
-    <script src="script.js"></script>
+
+    <div id="controls">
+      <button onclick="move('left')">←</button>
+      <button onclick="move('up')">↑</button>
+      <button onclick="move('down')">↓</button>
+      <button onclick="move('right')">→</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
