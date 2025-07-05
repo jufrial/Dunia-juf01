@@ -7,25 +7,67 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <audio id="bgm" src="sound/backsound.mp3" autoplay loop></audio>
+  <audio id="bgm" src="sound/bgm.mp3" autoplay loop></audio>
 
-  <div id="game">
-    <img src="img/bg_taman.jpg" id="background" alt="Taman Kota Sore">
-    <img src="img/juf_idle.png" id="juf" alt="Juf">
-    <img src="img/shira_normal.png" id="shira" alt="Shira">
+  <div id="game-container">
+    <!-- Karakter Utama -->
+    <div id="character" class="character" style="top: 50%; left: 50%;"></div>
 
-    <div id="dialog-box">
+    <!-- NPC: Shira -->
+    <div id="npc-shira" class="npc" style="top: 60%; left: 70%;" onclick="interactWithShira()"></div>
+
+    <!-- Dialog Box -->
+    <div id="dialog-box" class="dialog hidden">
       <p id="dialog-text">...</p>
-    </div>
-
-    <div id="controls">
-      <button onclick="move('left')">←</button>
-      <button onclick="move('up')">↑</button>
-      <button onclick="move('down')">↓</button>
-      <button onclick="move('right')">→</button>
+      <button onclick="nextDialog()">Lanjut</button>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <!-- Kontrol Gerak -->
+  <div id="controls">
+    <button onclick="move('up')">⬆️</button>
+    <div>
+      <button onclick="move('left')">⬅️</button>
+      <button onclick="move('down')">⬇️</button>
+      <button onclick="move('right')">➡️</button>
+    </div>
+  </div>
+
+  <script>
+    const char = document.getElementById("character");
+    const dialogBox = document.getElementById("dialog-box");
+    const dialogText = document.getElementById("dialog-text");
+    let dialogIndex = 0;
+    const dialogs = [
+      "Shira: Hai Juf... kamu datang juga.",
+      "Shira: Aku sudah menunggu di taman ini.",
+      "Shira: Hari ini... aku ingin bicara dari hati ke hati."
+    ];
+
+    function move(direction) {
+      const step = 10;
+      const top = parseInt(window.getComputedStyle(char).top);
+      const left = parseInt(window.getComputedStyle(char).left);
+      if (direction === "up") char.style.top = `${top - step}px`;
+      if (direction === "down") char.style.top = `${top + step}px`;
+      if (direction === "left") char.style.left = `${left - step}px`;
+      if (direction === "right") char.style.left = `${left + step}px`;
+    }
+
+    function interactWithShira() {
+      dialogBox.classList.remove("hidden");
+      dialogIndex = 0;
+      dialogText.innerText = dialogs[dialogIndex];
+    }
+
+    function nextDialog() {
+      dialogIndex++;
+      if (dialogIndex < dialogs.length) {
+        dialogText.innerText = dialogs[dialogIndex];
+      } else {
+        dialogBox.classList.add("hidden");
+      }
+    }
+  </script>
 </body>
 </html>
